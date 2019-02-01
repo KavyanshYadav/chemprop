@@ -50,7 +50,7 @@ def grid_search(args: Namespace):
         logger.info(hyperparams)
 
         # Cross validate
-        mean_score, std_score = cross_validate(hyper_args, train_logger)
+        mean_score, std_score = cross_validate(hyper_args, TRAIN_LOGGER)
 
         # Record results
         temp_model = build_model(hyper_args)
