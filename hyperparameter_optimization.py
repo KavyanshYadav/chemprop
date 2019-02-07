@@ -1,5 +1,7 @@
 from argparse import ArgumentParser, Namespace
+from copy import deepcopy
 import json
+import os
 from typing import Dict, Union
 
 from hyperopt import fmin, hp, tpe
@@ -38,6 +40,9 @@ def grid_search(args: Namespace):
 
         # Update args with hyperparams
         hyper_args = deepcopy(args)
+        if args.save_dir is not None:
+            folder_name = '_'.join([f'{key}_{value}' if key in INT_KEYS else f'{key}_{value}' for key, value in hyperparams.items()])
+            hyper_args.save_dir = os.path.join(hyper_args.save_dir, folder_name)
         for key, value in hyperparams.items():
             setattr(hyper_args, key, value)
 
@@ -45,7 +50,7 @@ def grid_search(args: Namespace):
         logger.info(hyperparams)
 
         # Cross validate
-        mean_score, std_score = cross_validate(hyper_args, train_logger)
+        mean_score, std_score = cross_validate(hyper_args, TRAIN_LOGGER)
 
         # Record results
         temp_model = build_model(hyper_args)
