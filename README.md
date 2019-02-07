@@ -1,3 +1,7 @@
+# Deprecation Warning
+
+This repository is deprecated and has been replaced by [https://github.com/swansonk14/chemprop](https://github.com/swansonk14/chemprop), which contains a stable, clean version of the code. This repo is no longer actively maintained and should be used for reference only.
+
 # Property Prediction
 This repository contains graph convolutional networks (or message passing network) for molecule property prediction.
 
